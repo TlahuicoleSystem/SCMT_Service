@@ -1,30 +1,100 @@
 import { getConnetion } from '../database/database'
 import { queries } from '../database/queries'
 
-
-//consultar cliente
-export const consultarUsuarioService = async(usuario, contraseña) => {
-    let data = null
+//Login
+export const loginService = async(usuario, contraseña) => {
+    let respuesta = null
+    let complemento = null
+    let obj_unidos = null
     try {
         const conn = await getConnetion()
-        data = await conn.query(queries.consultarc, [usuario, contraseña])
-        switch (data[0].trol_id) {
+        respuesta = await conn.query(queries.consultarc, [usuario, contraseña])
+        switch (respuesta[0].trol_id) {
             case 1:
-                console.log("entro en el admin")
+                complemento = await conn.query(queries.consultarA, [respuesta[0].tusuario_admin_id])
                 break;
             case 2:
-                console.log("entro en el conductor")
+                complemento = await conn.query(queries.consultarC, [respuesta[0].tusuario_conductor_id])
                 break;
             case 3:
-                console.log("entro en el pasajero")
+                complemento = await conn.query(queries.consultarP, [respuesta[0].tusuario_pasajero_id])
                 break;
             default:
-                data = "rol no encontrado"
+                respuesta = "rol no encontrado"
                 break;
         }
     } catch (e) {
         throw e.message
     }
-    return data
+    obj_unidos = Object.assign(respuesta[0],complemento[0]);
+    return obj_unidos
+}
+
+export const consultarUsuariosService = async(compañia) => {
+    let respuesta = null
+    try {
+        const conn = await getConnetion()
+        respuesta = await conn.query(queries.consultarAll, compañia) 
+    } catch (e) {
+        throw e.message
+    }
+    return respuesta
+}
+
+export const insertarAdminService = async(admin) => {
+    let idNewProduct = null
+    try {
+        const conn = await getConnetion()
+        const result = await conn.query(queries.insertarAdmin, admin)
+        idNewProduct = result.insertId
+    } catch (e) {
+        throw e.message
+    }
+    return idNewProduct
+}
+
+export const insertarConductorService = async(conductor) => {
+    let idNewProduct = null
+    try {
+        const conn = await getConnetion()
+        const result = await conn.query(queries.insertarConductor, conductor)
+        idNewProduct = result.insertId
+    } catch (e) {
+        throw e.message
+    }
+    return idNewProduct
+}
+
+export const insertarPasajeroService = async(pasajero) => {
+    let idNewProduct = null
+    try {
+        const conn = await getConnetion()
+        const result = await conn.query(queries.insertarPasajero, pasajero)
+        idNewProduct = result.insertId
+    } catch (e) {
+        throw e.message
+    }
+    return idNewProduct
+}
+
+export const insertarUsuarioService = async(usuario) => {
+    let idNewProduct = null
+    try {
+        const conn = await getConnetion()
+        const result = await conn.query(queries.insertarUsuario, usuario)
+        idNewProduct = result.insertId
+    } catch (e) {
+        throw e.message
+    }
+    return idNewProduct
+}
+
+export const eliminarUsuarioService = async (id) => {
+    try {
+        const conn = await getConnetion()
+        await conn.query(queries.eliminarUsuario, id)
+    } catch (e) {
+        throw e.message
+    }
 }
 
