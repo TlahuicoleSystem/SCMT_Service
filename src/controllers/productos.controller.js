@@ -1,5 +1,5 @@
 import {loginService,consultarUsuariosService,insertarAdminService,insertarUsuarioService, insertarConductorService, insertarPasajeroService,
-eliminarUsuarioService} from '../servicios/productos.servicio'
+eliminarUsuarioService, consultarUsuarioService, actualizarAdminService, actualizarCondcutorService, actualizarPasajeroService, actualizarUsuarioService} from '../servicios/productos.servicio'
 
 
 //Construir la url de la imagen y regresarla
@@ -47,6 +47,38 @@ export const loginController = async(req, res) => {
             respuesta = {
                 success: true,
                 data: id,
+                message: "Se encontro el usuario"
+            }
+        }
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "No se encontraron usuarios"
+        }
+        status = 400
+    }
+    res.status(status)
+    res.json(respuesta)
+}
+
+export const consultarUsuarioController = async(req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const { id } = req.query
+        const idd = await consultarUsuarioService(id)
+        if (idd === "rol no encontrado"){
+            respuesta = {
+                success: false,
+                data: null,
+                message: "No se encontraron usuarios"
+            }
+        }else{
+            respuesta = {
+                success: true,
+                data: idd,
                 message: "Se encontro el usuario"
             }
         }
@@ -209,7 +241,109 @@ export const eliminarUsuarioController = async(req, res) => {
         }
         status = 400
     }
+    res.status(status)
+    res.json(respuesta)
+}
 
+export const actualizarAdminController = async(req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const { id } = req.query
+        const administrador = req.body
+        await actualizarAdminService(administrador, id)
+        respuesta = {
+            success: true,
+            data: null,
+            message: "administrador actualizado"
+        }
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "administrador no actualizado",
+            exception: e
+        }
+        status = 400
+    }
+    res.status(status)
+    res.json(respuesta)
+}
+
+export const actualizarConductorController = async(req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const { id } = req.query
+        const conductor = req.body
+        await actualizarCondcutorService(conductor, id)
+        respuesta = {
+            success: true,
+            data: null,
+            message: "conductor actualizado"
+        }
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "conductor no actualizado",
+            exception: e
+        }
+        status = 400
+    }
+    res.status(status)
+    res.json(respuesta)
+}
+export const actualizarPasajeroController = async(req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const { id } = req.query
+        const pasajero = req.body
+        await actualizarPasajeroService(pasajero, id)
+        respuesta = {
+            success: true,
+            data: null,
+            message: "pasajero actualizado"
+        }
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "pasajero no actualizado",
+            exception: e
+        }
+        status = 400
+    }
+    res.status(status)
+    res.json(respuesta)
+}
+
+export const actualizarUsuarioController = async(req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const { id } = req.query
+        const usuario = req.body
+        await actualizarUsuarioService(usuario, id)
+        respuesta = {
+            success: true,
+            data: null,
+            message: "usuario actualizado"
+        }
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "usuario no actualizado",
+            exception: e
+        }
+        status = 400
+    }
     res.status(status)
     res.json(respuesta)
 }
