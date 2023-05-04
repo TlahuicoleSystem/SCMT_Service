@@ -1,7 +1,8 @@
   import { Router } from 'express'
   import {insertarI,loginController,consultarUsuariosController,insertarAdminController,insertarUsuarioController,insertarConductorController,
   insertarPasajeroController, eliminarUsuarioController,consultarUsuarioController,actualizarAdminController, actualizarConductorController, actualizarPasajeroController,
-  actualizarUsuarioController} from '../controllers/productos.controller'
+  actualizarUsuarioController, consultarRutasController, consultarRutaController,consultarConductoresController, insertarRutaController,eliminarRutaController,actualizarRutaController,
+  } from '../controllers/productos.controller'
 
   const upload = require('../libs/storage')
   const router = Router()
@@ -19,5 +20,11 @@
   router.post("/actualizarConductor", actualizarConductorController) //actualizar conductor
   router.post("/actualizarPasajero", actualizarPasajeroController) //actualizar conductor
   router.post("/actualizarUsuario", actualizarUsuarioController) //actualizar administrador
+  router.get("/consultarRutas", consultarRutasController) //consultar todas las rutas
+  router.get("/consultarRuta", consultarRutaController) //consultar una ruta
+  router.get("/consultarConductores", consultarConductoresController) //consultar conductores para lista
+  router.post("/insertarRuta", insertarRutaController)//insertar ruta
+  router.get("/eliminarRuta", eliminarRutaController)//eliminar usuario
+  router.post("/actualizarRuta", actualizarRutaController) //actualizar administrador
 
   export default router
