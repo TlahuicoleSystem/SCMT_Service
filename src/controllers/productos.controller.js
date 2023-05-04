@@ -1,5 +1,6 @@
 import {loginService,consultarUsuariosService,insertarAdminService,insertarUsuarioService, insertarConductorService, insertarPasajeroService,
-eliminarUsuarioService, consultarUsuarioService, actualizarAdminService, actualizarCondcutorService, actualizarPasajeroService, actualizarUsuarioService} from '../servicios/productos.servicio'
+eliminarUsuarioService, consultarUsuarioService, actualizarAdminService, actualizarCondcutorService, actualizarPasajeroService, actualizarUsuarioService,
+consultarRutasService, consultarRutaService, consultarConductoresService,insertarRutaService,eliminarRutaService,actualizarRutaService} from '../servicios/productos.servicio'
 
 
 //Construir la url de la imagen y regresarla
@@ -33,6 +34,7 @@ export const insertarI = async(req, res) => {
 export const loginController = async(req, res) => {
     let respuesta = null
     let status = null
+    console.log(req.body)
     try {
         const { usuario } = req.body
         const { contraseña } = req.body
@@ -340,6 +342,154 @@ export const actualizarUsuarioController = async(req, res) => {
             success: false,
             data: null,
             message: "usuario no actualizado",
+            exception: e
+        }
+        status = 400
+    }
+    res.status(status)
+    res.json(respuesta)
+}
+
+export const consultarRutasController = async(req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const { compania } = req.query
+        const id = await consultarRutasService(compania)
+        respuesta = {
+            success: true,
+            data: id,
+            message: "Rutas encontradas"
+        }
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "No se encontraron rutas"
+        }
+        status = 400
+    }
+    res.status(status)
+    res.json(respuesta)
+}
+
+export const consultarRutaController = async(req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const { id } = req.query
+        const idd = await consultarRutaService(id)
+        respuesta = {
+            success: true,
+            data: idd,
+            message: "Rutas encontradas"
+        }
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "No se encontraron rutas"
+        }
+        status = 400
+    }
+    res.status(status)
+    res.json(respuesta)
+}
+
+export const consultarConductoresController = async(req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const { compania } = req.query
+        const id = await consultarConductoresService(compania)
+        respuesta = {
+            success: true,
+            data: id,
+            message: "Conductores encontrados"
+        }
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "No se encontraron conductores"
+        }
+        status = 400
+    }
+    res.status(status)
+    res.json(respuesta)
+}
+
+export const insertarRutaController = async(req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const ruta = req.body
+        const id = await insertarRutaService(ruta)
+        respuesta = {
+            success: true,
+            data: id,
+            message: "Ruta agregada"
+        }
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "Ruta no agregada",
+            exception: e
+        }
+        status = 400
+    }
+    res.status(status)
+    res.json(respuesta)
+}
+
+export const eliminarRutaController = async(req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const { id } = req.query
+        await eliminarRutaService(id)
+        respuesta = {
+            success: true,
+            data: null,
+            message: "Ruta eliminada"
+        }
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "Ruta no eliminada ",
+            exception: e
+        }
+        status = 400
+    }
+    res.status(status)
+    res.json(respuesta)
+}
+
+export const actualizarRutaController = async(req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const { id } = req.query
+        const ruta = req.body
+        await actualizarRutaService(ruta, id)
+        respuesta = {
+            success: true,
+            data: null,
+            message: "Ruta actualizada"
+        }
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "Ruta no actualizada",
             exception: e
         }
         status = 400
