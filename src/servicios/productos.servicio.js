@@ -161,3 +161,64 @@ export const actualizarUsuarioService = async(usuario, id) => {
     }
 }
 
+export const consultarRutasService = async(compañia) => {
+    let respuesta = null
+    try {
+        const conn = await getConnetion()
+        respuesta = await conn.query(queries.consultarRutas, compañia) 
+    } catch (e) {
+        throw e.message
+    }
+    return respuesta
+}
+
+export const consultarRutaService = async(id) => {
+    let respuesta = null
+    try {
+        const conn = await getConnetion()
+        respuesta = await conn.query(queries.consultarRuta, id) 
+    } catch (e) {
+        throw e.message
+    }
+    return respuesta
+}
+
+export const consultarConductoresService = async(compania) => {
+    let respuesta = null
+    try {
+        const conn = await getConnetion()
+        respuesta = await conn.query(queries.consultarConductores, compania) 
+    } catch (e) {
+        throw e.message
+    }
+    return respuesta
+}
+
+export const insertarRutaService = async(ruta) => {
+    let idNewProduct = null
+    try {
+        const conn = await getConnetion()
+        const result = await conn.query(queries.insertarRuta, ruta)
+        idNewProduct = result.insertId
+    } catch (e) {
+        throw e.message
+    }
+    return idNewProduct
+}
+
+export const eliminarRutaService = async (id) => {
+    try {
+        const conn = await getConnetion()
+        await conn.query(queries.eliminarRuta, id)
+    } catch (e) {
+        throw e.message
+    }
+}
+export const actualizarRutaService = async(ruta, id) => {
+    try {
+        const conn = await getConnetion()
+        await conn.query(queries.actualizarRuta, [ruta, id])
+    } catch (e) {
+        throw e.message
+    }
+}
