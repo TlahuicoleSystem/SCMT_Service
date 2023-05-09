@@ -2,7 +2,7 @@ import { getConnetion } from '../database/database'
 import { queries } from '../database/queries'
 
 //Login
-export const loginService = async(usuario, contraseña) => {
+export const loginService = async (usuario, contraseña) => {
     let respuesta = null
     let complemento = null
     let obj_unidos = null
@@ -26,22 +26,22 @@ export const loginService = async(usuario, contraseña) => {
     } catch (e) {
         throw e.message
     }
-    obj_unidos = Object.assign(respuesta[0],complemento[0]);
+    obj_unidos = Object.assign(respuesta[0], complemento[0]);
     return obj_unidos
 }
 
-export const consultarUsuariosService = async(compañia) => {
+export const consultarUsuariosService = async (compañia) => {
     let respuesta = null
     try {
         const conn = await getConnetion()
-        respuesta = await conn.query(queries.consultarAll, compañia) 
+        respuesta = await conn.query(queries.consultarAll, compañia)
     } catch (e) {
         throw e.message
     }
     return respuesta
 }
 
-export const consultarUsuarioService = async(id) => {
+export const consultarUsuarioService = async (id) => {
     let respuesta = null
     let complemento = null
     let obj_unidos = null
@@ -65,11 +65,11 @@ export const consultarUsuarioService = async(id) => {
     } catch (e) {
         throw e.message
     }
-    obj_unidos = Object.assign(respuesta[0],complemento[0]);
+    obj_unidos = Object.assign(respuesta[0], complemento[0]);
     return obj_unidos
 }
 
-export const insertarAdminService = async(admin) => {
+export const insertarAdminService = async (admin) => {
     let idNewProduct = null
     try {
         const conn = await getConnetion()
@@ -81,7 +81,7 @@ export const insertarAdminService = async(admin) => {
     return idNewProduct
 }
 
-export const insertarConductorService = async(conductor) => {
+export const insertarConductorService = async (conductor) => {
     let idNewProduct = null
     try {
         const conn = await getConnetion()
@@ -93,7 +93,7 @@ export const insertarConductorService = async(conductor) => {
     return idNewProduct
 }
 
-export const insertarPasajeroService = async(pasajero) => {
+export const insertarPasajeroService = async (pasajero) => {
     let idNewProduct = null
     try {
         const conn = await getConnetion()
@@ -105,7 +105,7 @@ export const insertarPasajeroService = async(pasajero) => {
     return idNewProduct
 }
 
-export const insertarUsuarioService = async(usuario) => {
+export const insertarUsuarioService = async (usuario) => {
     let idNewProduct = null
     try {
         const conn = await getConnetion()
@@ -126,7 +126,7 @@ export const eliminarUsuarioService = async (id) => {
     }
 }
 
-export const actualizarAdminService = async(administrador, id) => {
+export const actualizarAdminService = async (administrador, id) => {
     try {
         const conn = await getConnetion()
         await conn.query(queries.actualizarA, [administrador, id])
@@ -135,7 +135,7 @@ export const actualizarAdminService = async(administrador, id) => {
     }
 }
 
-export const actualizarCondcutorService = async(conductor, id) => {
+export const actualizarCondcutorService = async (conductor, id) => {
     try {
         const conn = await getConnetion()
         await conn.query(queries.actualizarC, [conductor, id])
@@ -143,7 +143,7 @@ export const actualizarCondcutorService = async(conductor, id) => {
         throw e.message
     }
 }
-export const actualizarPasajeroService = async(pasajero, id) => {
+export const actualizarPasajeroService = async (pasajero, id) => {
     try {
         const conn = await getConnetion()
         await conn.query(queries.actualizarP, [pasajero, id])
@@ -152,7 +152,7 @@ export const actualizarPasajeroService = async(pasajero, id) => {
     }
 }
 
-export const actualizarUsuarioService = async(usuario, id) => {
+export const actualizarUsuarioService = async (usuario, id) => {
     try {
         const conn = await getConnetion()
         await conn.query(queries.actualizarUsuario, [usuario, id])
@@ -161,40 +161,40 @@ export const actualizarUsuarioService = async(usuario, id) => {
     }
 }
 
-export const consultarRutasService = async(compañia) => {
+export const consultarRutasService = async (compañia) => {
     let respuesta = null
     try {
         const conn = await getConnetion()
-        respuesta = await conn.query(queries.consultarRutas, compañia) 
+        respuesta = await conn.query(queries.consultarRutas, compañia)
     } catch (e) {
         throw e.message
     }
     return respuesta
 }
 
-export const consultarRutaService = async(id) => {
+export const consultarRutaService = async (id) => {
     let respuesta = null
     try {
         const conn = await getConnetion()
-        respuesta = await conn.query(queries.consultarRuta, id) 
+        respuesta = await conn.query(queries.consultarRuta, id)
     } catch (e) {
         throw e.message
     }
     return respuesta
 }
 
-export const consultarConductoresService = async(compania) => {
+export const consultarConductoresService = async (compania) => {
     let respuesta = null
     try {
         const conn = await getConnetion()
-        respuesta = await conn.query(queries.consultarConductores, compania) 
+        respuesta = await conn.query(queries.consultarConductores, compania)
     } catch (e) {
         throw e.message
     }
     return respuesta
 }
 
-export const insertarRutaService = async(ruta) => {
+export const insertarRutaService = async (ruta) => {
     let idNewProduct = null
     try {
         const conn = await getConnetion()
@@ -214,11 +214,34 @@ export const eliminarRutaService = async (id) => {
         throw e.message
     }
 }
-export const actualizarRutaService = async(ruta, id) => {
+export const actualizarRutaService = async (ruta, id) => {
     try {
         const conn = await getConnetion()
         await conn.query(queries.actualizarRuta, [ruta, id])
     } catch (e) {
         throw e.message
     }
+}
+
+export const consultarIncidenciasService = async (ruta) => {
+    let respuesta = null
+    try {
+        const conn = await getConnetion()
+        respuesta = await conn.query(queries.consultarIncidencias, ruta)
+    } catch (e) {
+        throw e.message
+    }
+    return respuesta
+}
+
+export const insertarIncidenciaService = async (ruta) => {
+    let idNewIncidencia = null
+    try {
+        const conn = await getConnetion()
+        const result = await conn.query(queries.insertarIncidencias, ruta)
+        idNewIncidencia = result.insertId
+    } catch (e) {
+        throw e.message
+    }
+    return idNewIncidencia
 }
