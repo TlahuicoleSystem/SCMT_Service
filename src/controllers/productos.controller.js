@@ -1,10 +1,12 @@
-import {loginService,consultarUsuariosService,insertarAdminService,insertarUsuarioService, insertarConductorService, insertarPasajeroService,
-eliminarUsuarioService, consultarUsuarioService, actualizarAdminService, actualizarCondcutorService, actualizarPasajeroService, actualizarUsuarioService,
-consultarRutasService, consultarRutaService, consultarConductoresService,insertarRutaService,eliminarRutaService,actualizarRutaService} from '../servicios/productos.servicio'
+import {
+    loginService, consultarUsuariosService, insertarAdminService, insertarUsuarioService, insertarConductorService, insertarPasajeroService,
+    eliminarUsuarioService, consultarUsuarioService, actualizarAdminService, actualizarCondcutorService, actualizarPasajeroService, actualizarUsuarioService,
+    consultarRutasService, consultarRutaService, consultarConductoresService, insertarRutaService, eliminarRutaService, actualizarRutaService, consultarIncidenciasService, insertarIncidenciaService,
+} from '../servicios/productos.servicio'
 
 
 //Construir la url de la imagen y regresarla
-export const insertarI = async(req, res) => {
+export const insertarI = async (req, res) => {
     let respuesta = null
     let status = null
     try {
@@ -31,7 +33,7 @@ export const insertarI = async(req, res) => {
 }
 
 
-export const loginController = async(req, res) => {
+export const loginController = async (req, res) => {
     let respuesta = null
     let status = null
     console.log(req.body)
@@ -39,13 +41,13 @@ export const loginController = async(req, res) => {
         const { usuario } = req.body
         const { contraseña } = req.body
         const id = await loginService(usuario, contraseña)
-        if (id === "rol no encontrado"){
+        if (id === "rol no encontrado") {
             respuesta = {
                 success: false,
                 data: null,
                 message: "No se encontraron usuarios"
             }
-        }else{
+        } else {
             respuesta = {
                 success: true,
                 data: id,
@@ -65,19 +67,19 @@ export const loginController = async(req, res) => {
     res.json(respuesta)
 }
 
-export const consultarUsuarioController = async(req, res) => {
+export const consultarUsuarioController = async (req, res) => {
     let respuesta = null
     let status = null
     try {
         const { id } = req.query
         const idd = await consultarUsuarioService(id)
-        if (idd === "rol no encontrado"){
+        if (idd === "rol no encontrado") {
             respuesta = {
                 success: false,
                 data: null,
                 message: "No se encontraron usuarios"
             }
-        }else{
+        } else {
             respuesta = {
                 success: true,
                 data: idd,
@@ -98,7 +100,7 @@ export const consultarUsuarioController = async(req, res) => {
 }
 
 
-export const consultarUsuariosController = async(req, res) => {
+export const consultarUsuariosController = async (req, res) => {
     let respuesta = null
     let status = null
     try {
@@ -122,7 +124,7 @@ export const consultarUsuariosController = async(req, res) => {
     res.json(respuesta)
 }
 
-export const insertarAdminController = async(req, res) => {
+export const insertarAdminController = async (req, res) => {
     let respuesta = null
     let status = null
     try {
@@ -147,7 +149,7 @@ export const insertarAdminController = async(req, res) => {
     res.json(respuesta)
 }
 
-export const insertarConductorController = async(req, res) => {
+export const insertarConductorController = async (req, res) => {
     let respuesta = null
     let status = null
     try {
@@ -172,7 +174,7 @@ export const insertarConductorController = async(req, res) => {
     res.json(respuesta)
 }
 
-export const insertarPasajeroController = async(req, res) => {
+export const insertarPasajeroController = async (req, res) => {
     let respuesta = null
     let status = null
     try {
@@ -197,7 +199,7 @@ export const insertarPasajeroController = async(req, res) => {
     res.json(respuesta)
 }
 
-export const insertarUsuarioController = async(req, res) => {
+export const insertarUsuarioController = async (req, res) => {
     let respuesta = null
     let status = null
     try {
@@ -222,7 +224,7 @@ export const insertarUsuarioController = async(req, res) => {
     res.json(respuesta)
 }
 
-export const eliminarUsuarioController = async(req, res) => {
+export const eliminarUsuarioController = async (req, res) => {
     let respuesta = null
     let status = null
     try {
@@ -247,7 +249,7 @@ export const eliminarUsuarioController = async(req, res) => {
     res.json(respuesta)
 }
 
-export const actualizarAdminController = async(req, res) => {
+export const actualizarAdminController = async (req, res) => {
     let respuesta = null
     let status = null
     try {
@@ -273,7 +275,7 @@ export const actualizarAdminController = async(req, res) => {
     res.json(respuesta)
 }
 
-export const actualizarConductorController = async(req, res) => {
+export const actualizarConductorController = async (req, res) => {
     let respuesta = null
     let status = null
     try {
@@ -298,7 +300,7 @@ export const actualizarConductorController = async(req, res) => {
     res.status(status)
     res.json(respuesta)
 }
-export const actualizarPasajeroController = async(req, res) => {
+export const actualizarPasajeroController = async (req, res) => {
     let respuesta = null
     let status = null
     try {
@@ -324,7 +326,7 @@ export const actualizarPasajeroController = async(req, res) => {
     res.json(respuesta)
 }
 
-export const actualizarUsuarioController = async(req, res) => {
+export const actualizarUsuarioController = async (req, res) => {
     let respuesta = null
     let status = null
     try {
@@ -350,7 +352,7 @@ export const actualizarUsuarioController = async(req, res) => {
     res.json(respuesta)
 }
 
-export const consultarRutasController = async(req, res) => {
+export const consultarRutasController = async (req, res) => {
     let respuesta = null
     let status = null
     try {
@@ -374,7 +376,7 @@ export const consultarRutasController = async(req, res) => {
     res.json(respuesta)
 }
 
-export const consultarRutaController = async(req, res) => {
+export const consultarRutaController = async (req, res) => {
     let respuesta = null
     let status = null
     try {
@@ -398,7 +400,7 @@ export const consultarRutaController = async(req, res) => {
     res.json(respuesta)
 }
 
-export const consultarConductoresController = async(req, res) => {
+export const consultarConductoresController = async (req, res) => {
     let respuesta = null
     let status = null
     try {
@@ -422,7 +424,7 @@ export const consultarConductoresController = async(req, res) => {
     res.json(respuesta)
 }
 
-export const insertarRutaController = async(req, res) => {
+export const insertarRutaController = async (req, res) => {
     let respuesta = null
     let status = null
     try {
@@ -447,7 +449,7 @@ export const insertarRutaController = async(req, res) => {
     res.json(respuesta)
 }
 
-export const eliminarRutaController = async(req, res) => {
+export const eliminarRutaController = async (req, res) => {
     let respuesta = null
     let status = null
     try {
@@ -472,7 +474,7 @@ export const eliminarRutaController = async(req, res) => {
     res.json(respuesta)
 }
 
-export const actualizarRutaController = async(req, res) => {
+export const actualizarRutaController = async (req, res) => {
     let respuesta = null
     let status = null
     try {
@@ -490,6 +492,55 @@ export const actualizarRutaController = async(req, res) => {
             success: false,
             data: null,
             message: "Ruta no actualizada",
+            exception: e
+        }
+        status = 400
+    }
+    res.status(status)
+    res.json(respuesta)
+}
+
+export const consultarIncidenciasController = async (req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const { rutas } = req.query
+        const idd = await consultarIncidenciasService(rutas)
+        respuesta = {
+            success: true,
+            data: idd,
+            message: "Incidencias encontradas"
+        }
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "No se encontraron Incidencias"
+        }
+        status = 400
+    }
+    res.status(status)
+    res.json(respuesta)
+}
+
+export const insertarIncidenciaController = async (req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const incidencia = req.body
+        const id = await insertarIncidenciaService(incidencia)
+        respuesta = {
+            success: true,
+            data: id,
+            message: "Incidencia agregada"
+        }
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "Incidencia no agregada",
             exception: e
         }
         status = 400
