@@ -16,10 +16,10 @@ export const queries = {
     actualizarC: 'UPDATE tusuario_conductor set ? WHERE id = ?',
     actualizarP: 'UPDATE tusuario_pasajero set ? WHERE id = ?',
     actualizarUsuario: 'UPDATE tusuario set ? WHERE id = ?',
-    
+  
     consultarRutas: 'SELECT truta.id, truta.tcompania_id, truta.tusuario_id_conductor, truta.nombre AS "nombre_ruta", truta.descripcion, truta.punto_acceso, truta.vehiculo, tusuario.nombre, tusuario.primer_apellido, tusuario.segundo_apellido FROM truta INNER JOIN tusuario ON truta.tusuario_id_conductor = tusuario.id WHERE truta.tcompania_id = ? AND truta.estado = 1',
     consultarRuta: 'SELECT truta.id, truta.tcompania_id, truta.tusuario_id_conductor, truta.nombre AS "nombre_ruta", truta.descripcion, truta.punto_acceso, truta.vehiculo, tusuario.nombre, tusuario.primer_apellido, tusuario.segundo_apellido FROM truta INNER JOIN tusuario ON truta.tusuario_id_conductor = tusuario.id WHERE truta.id = ? AND truta.estado = 1 ',
-    consultarConductores:'SELECT id, nombre, primer_apellido, segundo_apellido FROM  tusuario  WHERE tcompania_id = ? AND estado = 1 AND trol_id = 2',
+    consultarConductores: 'SELECT id, nombre, primer_apellido, segundo_apellido FROM  tusuario  WHERE tcompania_id = ? AND estado = 1 AND trol_id = 2',
     insertarRuta: 'INSERT INTO truta set ?',
     eliminarRuta: 'UPDATE truta SET estado = 0 WHERE id = ?',
     actualizarRuta: 'UPDATE truta set ? WHERE id = ?',
@@ -31,4 +31,7 @@ export const queries = {
     eliminarPasajeroRuta: 'UPDATE truta_usuario SET estado = 0 WHERE id = ?',
     //favorits: 'SELECT pedidos.codigoBarras, productos.foto, productos.nombre, productos.descripcion_breve, productos.precio, COUNT( pedidos.codigoBarras ) AS total FROM pedidos INNER JOIN productos ON pedidos.codigoBarras = productos.codigo_barras GROUP BY pedidos.codigoBarras ORDER BY total DESC',
     //buscar: 'SELECT codigo_barras, foto, nombre, descripcion_breve, precio FROM productos WHERE nombre LIKE "%"?"%" ',
+
+    consultarIncidencias: 'SELECT * FROM tincidente WHERE truta_id = ? AND estado = 1',
+    insertarIncidencias: 'INSERT INTO tincidente set ?',
 }
