@@ -1,9 +1,7 @@
-import {
-    loginService, consultarUsuariosService, insertarAdminService, insertarUsuarioService, insertarConductorService, insertarPasajeroService,
-    eliminarUsuarioService, consultarUsuarioService, actualizarAdminService, actualizarCondcutorService, actualizarPasajeroService, actualizarUsuarioService,
-    consultarRutasService, consultarRutaService, consultarConductoresService, insertarRutaService, eliminarRutaService, actualizarRutaService, consultarIncidenciasService, insertarIncidenciaService,
-} from '../servicios/productos.servicio'
-
+import {loginService,consultarUsuariosService,insertarAdminService,insertarUsuarioService, insertarConductorService, insertarPasajeroService,
+eliminarUsuarioService, consultarUsuarioService, actualizarAdminService, actualizarCondcutorService, actualizarPasajeroService, actualizarUsuarioService,
+consultarRutasService, consultarRutaService, consultarConductoresService,insertarRutaService,eliminarRutaService,actualizarRutaService,consultarPasajerosRutaService,
+consultarPasajerosService,insertarPasajeroRutaService,eliminarPasajeroRutaService, consultarIncidenciasService, insertarIncidenciaService,} from '../servicios/productos.servicio'
 
 //Construir la url de la imagen y regresarla
 export const insertarI = async (req, res) => {
@@ -492,6 +490,106 @@ export const actualizarRutaController = async (req, res) => {
             success: false,
             data: null,
             message: "Ruta no actualizada",
+            exception: e
+        }
+        status = 400
+    }
+    res.status(status)
+    res.json(respuesta)
+}
+export const consultarPasajerosRutaController = async(req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const { id } = req.query
+        const idd = await consultarPasajerosRutaService(id)
+        respuesta = {
+            success: true,
+            data: idd,
+            message: "Pasajeros encontrados"
+        }
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "No se encontraron pasajeros"
+        }
+        status = 400
+    }
+    res.status(status)
+    res.json(respuesta)
+}
+
+export const consultarPasajerosController = async(req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const { compania } = req.query
+        const id = await consultarPasajerosService(compania)
+        respuesta = {
+            success: true,
+            data: id,
+            message: "Pasajeros encontrados"
+        }
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "No se encontraron pasajeros"
+        }
+        status = 400
+    }
+    res.status(status)
+    res.json(respuesta)
+}
+
+export const insertarPasajeroRutaController = async(req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const datos = req.body
+        console.log(datos)
+        const { ruta } = req.query
+        const { pasajero } = req.query
+        const id = await insertarPasajeroRutaService(pasajero,ruta,datos)
+        respuesta = {
+            success: true,
+            data: id,
+            message: "Ruta agregada"
+        }
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "Ruta no agregada",
+            exception: e
+        }
+        status = 400
+    }
+    res.status(status)
+    res.json(respuesta)
+}
+
+export const eliminarPasajeroRutaController = async(req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const { id } = req.query
+        await eliminarPasajeroRutaService(id)
+        respuesta = {
+            success: true,
+            data: null,
+            message: "Eliminar pasajero de la ruta"
+        }
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "Pasajero no eliminado ",
             exception: e
         }
         status = 400
