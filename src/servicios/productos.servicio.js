@@ -269,7 +269,7 @@ export const eliminarPasajeroRutaService = async (id) => {
     } catch (e) {
         throw e.message
     }
-  
+}
 export const consultarIncidenciasService = async (ruta) => {
     let respuesta = null
     try {
