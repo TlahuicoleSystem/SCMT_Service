@@ -223,35 +223,35 @@ export const actualizarRutaService = async (ruta, id) => {
     }
 }
 
-export const consultarPasajerosRutaService = async(id) => {
+export const consultarPasajerosRutaService = async (id) => {
     let respuesta = null
     try {
         const conn = await getConnetion()
-        respuesta = await conn.query(queries.consultarPasajerosRuta, id) 
+        respuesta = await conn.query(queries.consultarPasajerosRuta, id)
     } catch (e) {
         throw e.message
     }
     return respuesta
 }
-export const consultarPasajerosService = async(compania) => {
+export const consultarPasajerosService = async (compania) => {
     let respuesta = null
     try {
         const conn = await getConnetion()
-        respuesta = await conn.query(queries.consultarPasajeros, compania) 
+        respuesta = await conn.query(queries.consultarPasajeros, compania)
     } catch (e) {
         throw e.message
     }
     return respuesta
 }
 
-export const insertarPasajeroRutaService = async(pasajero,ruta,datos) => {
+export const insertarPasajeroRutaService = async (pasajero, ruta, datos) => {
     let idNewProduct = null
     try {
         const conn = await getConnetion()
-        const result1 = await conn.query(queries.isPasajeroRuta,[pasajero, ruta])
-        if(result1[0].resultado == 1){
+        const result1 = await conn.query(queries.isPasajeroRuta, [pasajero, ruta])
+        if (result1[0].resultado == 1) {
             idNewProduct = "Pasajero existente en la ruta"
-        }else{
+        } else {
             const result = await conn.query(queries.insertarPasajeroRuta, datos)
             idNewProduct = result.insertId
             console.log(idNewProduct)
@@ -270,6 +270,7 @@ export const eliminarPasajeroRutaService = async (id) => {
         throw e.message
     }
 }
+
 export const consultarIncidenciasService = async (ruta) => {
     let respuesta = null
     try {
@@ -291,4 +292,35 @@ export const insertarIncidenciaService = async (ruta) => {
         throw e.message
     }
     return idNewIncidencia
+}
+
+export const eliminarIncidenciaService = async (id) => {
+    try {
+        const conn = await getConnetion()
+        await conn.query(queries.eliminarIncidencia, id)
+    } catch (e) {
+        throw e.message
+    }
+}
+
+export const consultarInformeIncidenciaService = async (inicio, fin) => {
+    let respuesta = null
+    try {
+        const conn = await getConnetion()
+        respuesta = await conn.query(queries.consultarInformeIncidencia, [inicio, fin])
+    } catch (e) {
+        throw e.message
+    }
+    return respuesta
+}
+
+export const consultarInformeAsistenciaService = async (inicio, fin) => {
+    let respuesta = null
+    try {
+        const conn = await getConnetion()
+        respuesta = await conn.query(queries.consultarInformeAsistencia, [inicio, fin])
+    } catch (e) {
+        throw e.message
+    }
+    return respuesta
 }
