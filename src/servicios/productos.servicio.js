@@ -194,6 +194,17 @@ export const consultarConductoresService = async (compania) => {
     return respuesta
 }
 
+export const consultarRutasCondcutorService = async (id) => {
+    let respuesta = null
+    try {
+        const conn = await getConnetion()
+        respuesta = await conn.query(queries.consultarRutasCondcutor, id)
+    } catch (e) {
+        throw e.message
+    }
+    return respuesta
+}
+
 export const insertarRutaService = async (ruta) => {
     let idNewProduct = null
     try {
@@ -282,14 +293,16 @@ export const consultarIncidenciasService = async (ruta) => {
     return respuesta
 }
 
-export const insertarIncidenciaService = async (ruta) => {
+export const insertarIncidenciaService = async (incidencia) => {
     let idNewIncidencia = null
     try {
         const conn = await getConnetion()
-        const result = await conn.query(queries.insertarIncidencias, ruta)
+        console.log(incidencia)
+        const result = await conn.query(queries.insertarIncidencias, incidencia)
         idNewIncidencia = result.insertId
     } catch (e) {
         throw e.message
+        console.log(e.message)
     }
     return idNewIncidencia
 }

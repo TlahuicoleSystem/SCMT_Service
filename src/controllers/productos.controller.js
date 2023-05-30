@@ -1,10 +1,9 @@
 import {
     loginService, consultarUsuariosService, insertarAdminService, insertarUsuarioService, insertarConductorService, insertarPasajeroService,
     eliminarUsuarioService, consultarUsuarioService, actualizarAdminService, actualizarCondcutorService, actualizarPasajeroService, actualizarUsuarioService,
-    consultarRutasService, consultarRutaService, consultarConductoresService, insertarRutaService, eliminarRutaService, actualizarRutaService, consultarPasajerosRutaService,
-    consultarPasajerosService, insertarPasajeroRutaService, eliminarPasajeroRutaService, consultarIncidenciasService, insertarIncidenciaService, eliminarIncidenciaService,
-    consultarInformeIncidenciaService,
-    consultarInformeAsistenciaService,
+    consultarRutasService, consultarRutaService, consultarConductoresService, consultarRutasCondcutorService, insertarRutaService, eliminarRutaService, 
+    actualizarRutaService, consultarPasajerosRutaService, consultarPasajerosService, insertarPasajeroRutaService, eliminarPasajeroRutaService, consultarIncidenciasService, insertarIncidenciaService, eliminarIncidenciaService,
+    consultarInformeIncidenciaService, consultarInformeAsistenciaService,
 } from '../servicios/productos.servicio'
 
 //Construir la url de la imagen y regresarla
@@ -38,7 +37,6 @@ export const insertarI = async (req, res) => {
 export const loginController = async (req, res) => {
     let respuesta = null
     let status = null
-    console.log(req.body)
     try {
         const { usuario } = req.body
         const { contraseña } = req.body
@@ -426,6 +424,27 @@ export const consultarConductoresController = async (req, res) => {
     res.json(respuesta)
 }
 
+export const consultarRutasConductorController = async (req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const { id } = req.query
+        const idd = await consultarRutasCondcutorService(id)
+        respuesta =  idd
+        
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "Rutas no encontradas"
+        }
+        status = 400
+    }
+    res.status(status)
+    res.json(respuesta)
+}
+
 export const insertarRutaController = async (req, res) => {
     let respuesta = null
     let status = null
@@ -631,7 +650,8 @@ export const insertarIncidenciaController = async (req, res) => {
     let status = null
     try {
         const incidencia = req.body
-        const id = await insertarIncidenciaService(incidencia)
+        const salida = await insertarIncidenciaService(incidencia)
+        let id = {id:salida}
         respuesta = {
             success: true,
             data: id,
@@ -645,6 +665,7 @@ export const insertarIncidenciaController = async (req, res) => {
             message: "Incidencia no agregada",
             exception: e
         }
+        console.log(e)
         status = 400
     }
     res.status(status)

@@ -6,7 +6,7 @@
     "scripts": {
         "dev": "babel-node src",
         "build": "babel src -d build",
-        "start": "node build"
+        "start": "npm run dev"
     },
     "keywords": [],
     "author": "",
