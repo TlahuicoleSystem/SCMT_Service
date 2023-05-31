@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'SCMTApis'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7D6B19D747A74243B2A936CEA04015FA }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3F249227F7314FB09BDCE4CCD51DDAB8 }}
           package: .
