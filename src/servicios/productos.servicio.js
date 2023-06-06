@@ -348,3 +348,17 @@ export const consultarInformeAsistenciaService = async (inicio, fin) => {
     }
     return respuesta
 }
+
+export const insertarAsistenciaService = async (asistencia) => {
+    let idNewIncidencia = null
+    try {
+        const conn = await getConnetion()
+        console.log(asistencia)
+        const result = await conn.query(queries.insertarAsistencias, asistencia)
+        idNewIncidencia = result.insertId
+    } catch (e) {
+        throw e.message
+        console.log(e.message)
+    }
+    return idNewIncidencia
+}

@@ -5,7 +5,7 @@ import {
   actualizarUsuarioController, consultarRutasController, consultarRutaController, consultarConductoresController, consultarRutasConductorController, insertarRutaController,
   eliminarRutaController, actualizarRutaController, consultarPasajerosRutaController, consultarPasajerosController, insertarPasajeroRutaController,
   eliminarPasajeroRutaController, consultarIncidenciasController, insertarIncidenciaController, eliminarIncidenciaController, consultarInformeIncidenciaController,
-  consultarInformeAsistenciaController, consultarRutasIncidenciasController
+  consultarInformeAsistenciaController, consultarRutasIncidenciasController, insertarAsistenciaController
 } from '../controllers/productos.controller'
 
 const upload = require('../libs/storage')
@@ -41,6 +41,8 @@ router.post("/insertarIncidencia", insertarIncidenciaController) //insertar inci
 router.get("/eliminarIncidencia", eliminarIncidenciaController) //eliminar incidencia
 router.get("/consultarInformeIncidencia", consultarInformeIncidenciaController) //consultar informe de incidencias
 router.get("/consultarInformeAsistencia", consultarInformeAsistenciaController) //consultar informe de asistencia
+
+router.post("/insertarAsistencia", insertarAsistenciaController)
 
 
 export default router

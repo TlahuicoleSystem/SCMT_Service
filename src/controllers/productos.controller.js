@@ -3,7 +3,7 @@ import {
     eliminarUsuarioService, consultarUsuarioService, actualizarAdminService, actualizarCondcutorService, actualizarPasajeroService, actualizarUsuarioService,
     consultarRutasService, consultarRutaService, consultarConductoresService, consultarRutasCondcutorService, insertarRutaService, eliminarRutaService,
     actualizarRutaService, consultarPasajerosRutaService, consultarPasajerosService, insertarPasajeroRutaService, eliminarPasajeroRutaService, consultarIncidenciasService, insertarIncidenciaService, eliminarIncidenciaService,
-    consultarInformeIncidenciaService, consultarInformeAsistenciaService, consultarRutasIncidenciasService,
+    consultarInformeIncidenciaService, consultarInformeAsistenciaService, consultarRutasIncidenciasService, insertarAsistenciaService
 } from '../servicios/productos.servicio'
 
 //Construir la url de la imagen y regresarla
@@ -12,7 +12,7 @@ export const insertarI = async (req, res) => {
     let status = null
     try {
         const { filename } = req.file
-        const ruta = "http://localhost:5000/public/" + filename
+        const ruta = "https://scmtapis.azurewebsites.net/public/" + filename
         console.log(filename)
         respuesta = {
             success: true,
@@ -762,6 +762,33 @@ export const consultarInformeAsistenciaController = async (req, res) => {
             data: null,
             message: "No se encontraron Asistencias"
         }
+        status = 400
+    }
+    res.status(status)
+    res.json(respuesta)
+}
+
+export const insertarAsistenciaController = async (req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const asistencia =  req.body
+        const salida = await insertarAsistenciaService(asistencia)
+        let id = { id: salida }
+        respuesta = {
+            success: true,
+            data: id,
+            message: "Asistencia agregada"
+        }
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "Asistencia no agregada",
+            exception: e
+        }
+        console.log(e)
         status = 400
     }
     res.status(status)

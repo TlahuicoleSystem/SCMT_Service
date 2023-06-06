@@ -4,9 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "dev": "babel-node src",
+        "start": "babel-node src",
         "build": "babel src -d build",
-        "start": "node build"
+        "dev": "node build"
     },
     "keywords": [],
     "author": "",
