@@ -40,5 +40,7 @@ export const queries = {
 
     consultarInformeIncidencia: 'SELECT tusuario.nombre, tusuario.primer_apellido, tusuario.segundo_apellido, tincidente.nombre AS "nombre_incidente", tincidente.descripcion, tincidente.fecha, tincidente.hora, truta.nombre AS "nombre_ruta" FROM tincidente INNER JOIN tusuario ON tincidente.tusuario_id = tusuario.id INNER JOIN truta ON tincidente.truta_id = truta.id WHERE tincidente.fecha BETWEEN ? AND ? AND tincidente.estado = 1',
     consultarInformeAsistencia: 'SELECT tusuario.nombre, tusuario.primer_apellido, tusuario.segundo_apellido, tusuario_pasajero.area, tusuario_pasajero.jefe_inmediato, truta.nombre AS "nombre_ruta", tasistencia.fecha, tasistencia.hora FROM tasistencia INNER JOIN tusuario ON tasistencia.tusuario_id = tusuario.id INNER JOIN tusuario_pasajero ON tusuario.tusuario_pasajero_id = tusuario_pasajero.id INNER JOIN truta ON tasistencia.truta_id = truta.id WHERE tasistencia.fecha BETWEEN ? AND ? AND tasistencia.estado = 1',
+    
+    insertarAsistencias: 'INSERT INTO tasistencia set ?',
     // consultarInformeRutas: 'SELECT * FROM truta WHERE '
 }
