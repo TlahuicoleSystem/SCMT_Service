@@ -5,6 +5,7 @@ import cors from 'cors'
 
 //Importo el archivo de las rutas
 import productsRoutes from './rutas/productos.rutas'
+import path from 'path'
 
 //inicializacion de express
 const app = express()
@@ -22,6 +23,6 @@ app.use(express.json())
 app.use("/scmt", productsRoutes)
 
 //Rura estatica para las imagenes
-app.use("/public", express.static(__dirname + '/img'))
+app.use("/public", express.static(path.join(__dirname + '/img')))
 
 export default app
