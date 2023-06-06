@@ -1,9 +1,9 @@
 import {
     loginService, consultarUsuariosService, insertarAdminService, insertarUsuarioService, insertarConductorService, insertarPasajeroService,
     eliminarUsuarioService, consultarUsuarioService, actualizarAdminService, actualizarCondcutorService, actualizarPasajeroService, actualizarUsuarioService,
-    consultarRutasService, consultarRutaService, consultarConductoresService, consultarRutasCondcutorService, insertarRutaService, eliminarRutaService, 
+    consultarRutasService, consultarRutaService, consultarConductoresService, consultarRutasCondcutorService, insertarRutaService, eliminarRutaService,
     actualizarRutaService, consultarPasajerosRutaService, consultarPasajerosService, insertarPasajeroRutaService, eliminarPasajeroRutaService, consultarIncidenciasService, insertarIncidenciaService, eliminarIncidenciaService,
-    consultarInformeIncidenciaService, consultarInformeAsistenciaService,
+    consultarInformeIncidenciaService, consultarInformeAsistenciaService, consultarRutasIncidenciasService,
 } from '../servicios/productos.servicio'
 
 //Construir la url de la imagen y regresarla
@@ -430,8 +430,8 @@ export const consultarRutasConductorController = async (req, res) => {
     try {
         const { id } = req.query
         const idd = await consultarRutasCondcutorService(id)
-        respuesta =  idd
-        
+        respuesta = idd
+
         status = 200
     } catch (e) {
         respuesta = {
@@ -651,7 +651,7 @@ export const insertarIncidenciaController = async (req, res) => {
     try {
         const incidencia = req.body
         const salida = await insertarIncidenciaService(incidencia)
-        let id = {id:salida}
+        let id = { id: salida }
         respuesta = {
             success: true,
             data: id,
@@ -666,6 +666,27 @@ export const insertarIncidenciaController = async (req, res) => {
             exception: e
         }
         console.log(e)
+        status = 400
+    }
+    res.status(status)
+    res.json(respuesta)
+}
+
+export const consultarRutasIncidenciasController = async (req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const { usuarioRuta } = req.query
+        const usuarioRutaRes = await consultarRutasIncidenciasService(usuarioRuta)
+        respuesta = usuarioRutaRes
+
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "Incidencias no encontradas"
+        }
         status = 400
     }
     res.status(status)
