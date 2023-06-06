@@ -35,6 +35,7 @@ export const queries = {
 
     consultarIncidencias: 'SELECT * FROM tincidente WHERE truta_id = ? AND estado = 1',
     insertarIncidencias: 'INSERT INTO tincidente set ?',
+    consultarRutasIncidencias: 'SELECT tincidente.id AS "id_incidente", truta.nombre AS "nombre_ruta", tincidente.nombre AS "nombre_incidente", tincidente.descripcion, tincidente.fecha, tincidente.hora FROM tincidente INNER JOIN truta_usuario ON tincidente.truta_id = truta_usuario.truta_id INNER JOIN truta ON tincidente.truta_id = truta.id WHERE truta_usuario.tusuario_id = 6 AND truta.estado = 1 AND truta_usuario.estado = 1 ORDER BY tincidente.fecha DESC',
     eliminarIncidencia: 'UPDATE tincidente SET estado = 0 WHERE id = ?',
 
     consultarInformeIncidencia: 'SELECT tusuario.nombre, tusuario.primer_apellido, tusuario.segundo_apellido, tincidente.nombre AS "nombre_incidente", tincidente.descripcion, tincidente.fecha, tincidente.hora, truta.nombre AS "nombre_ruta" FROM tincidente INNER JOIN tusuario ON tincidente.tusuario_id = tusuario.id INNER JOIN truta ON tincidente.truta_id = truta.id WHERE tincidente.fecha BETWEEN ? AND ? AND tincidente.estado = 1',

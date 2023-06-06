@@ -2,10 +2,10 @@ import { Router } from 'express'
 import {
   insertarI, loginController, consultarUsuariosController, insertarAdminController, insertarUsuarioController, insertarConductorController,
   insertarPasajeroController, eliminarUsuarioController, consultarUsuarioController, actualizarAdminController, actualizarConductorController, actualizarPasajeroController,
-  actualizarUsuarioController, consultarRutasController, consultarRutaController, consultarConductoresController, consultarRutasConductorController, insertarRutaController, 
-  eliminarRutaController, actualizarRutaController, consultarPasajerosRutaController, consultarPasajerosController, insertarPasajeroRutaController, 
-  eliminarPasajeroRutaController, consultarIncidenciasController, insertarIncidenciaController, eliminarIncidenciaController, consultarInformeIncidenciaController, 
-  consultarInformeAsistenciaController,
+  actualizarUsuarioController, consultarRutasController, consultarRutaController, consultarConductoresController, consultarRutasConductorController, insertarRutaController,
+  eliminarRutaController, actualizarRutaController, consultarPasajerosRutaController, consultarPasajerosController, insertarPasajeroRutaController,
+  eliminarPasajeroRutaController, consultarIncidenciasController, insertarIncidenciaController, eliminarIncidenciaController, consultarInformeIncidenciaController,
+  consultarInformeAsistenciaController, consultarRutasIncidenciasController
 } from '../controllers/productos.controller'
 
 const upload = require('../libs/storage')
@@ -34,6 +34,7 @@ router.post("/actualizarRuta", actualizarRutaController) //actualizar ruta
 router.get("/consultarPasajerosRuta", consultarPasajerosRutaController)
 router.get("/consultarPasajeros", consultarPasajerosController)
 router.post("/insertarPasajeroRuta", insertarPasajeroRutaController)
+router.get("/consultarRutasIncidencias", consultarRutasIncidenciasController)
 router.get("/eliminarPasajeroRuta", eliminarPasajeroRutaController)
 router.get("/concultarIncidencias", consultarIncidenciasController) //consultar incidencias
 router.post("/insertarIncidencia", insertarIncidenciaController) //insertar incidencia
