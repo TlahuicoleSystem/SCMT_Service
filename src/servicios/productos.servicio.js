@@ -307,6 +307,17 @@ export const insertarIncidenciaService = async (incidencia) => {
     return idNewIncidencia
 }
 
+export const consultarRutasIncidenciasService = async (usuarioRuta) => {
+    let respuesta = null
+    try {
+        const conn = await getConnetion()
+        respuesta = await conn.query(queries.consultarRutasIncidencias, usuarioRuta)
+    } catch (e) {
+        throw e.message
+    }
+    return respuesta
+}
+
 export const eliminarIncidenciaService = async (id) => {
     try {
         const conn = await getConnetion()
