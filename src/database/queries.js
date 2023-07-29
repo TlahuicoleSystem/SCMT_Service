@@ -21,6 +21,7 @@ export const queries = {
     consultarRuta: 'SELECT truta.id, truta.tcompania_id, truta.tusuario_id_conductor, truta.nombre AS "nombre_ruta", truta.descripcion, truta.punto_acceso, truta.vehiculo, tusuario.nombre, tusuario.primer_apellido, tusuario.segundo_apellido FROM truta INNER JOIN tusuario ON truta.tusuario_id_conductor = tusuario.id WHERE truta.id = ? AND truta.estado = 1 ',
     consultarConductores: 'SELECT id, nombre, primer_apellido, segundo_apellido FROM  tusuario  WHERE tcompania_id = ? AND estado = 1 AND trol_id = 2',
     consultarRutasCondcutor: 'SELECT id, nombre FROM truta WHERE tusuario_id_conductor = ? AND estado = 1',
+    consultarRutasPasajero: 'SELECT truta_usuario.truta_id AS "id", truta.nombre AS "nombre" FROM truta_usuario INNER JOIN truta ON truta_usuario.truta_id = truta.id  WHERE truta_usuario.tusuario_id = ? AND truta_usuario.estado = 1;',
     insertarRuta: 'INSERT INTO truta set ?',
     eliminarRuta: 'UPDATE truta SET estado = 0 WHERE id = ?',
     actualizarRuta: 'UPDATE truta set ? WHERE id = ?',
