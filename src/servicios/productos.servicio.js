@@ -205,6 +205,17 @@ export const consultarRutasCondcutorService = async (id) => {
     return respuesta
 }
 
+export const consultarRutasPasajeroService = async (id) => {
+    let respuesta = null
+    try {
+        const conn = await getConnetion()
+        respuesta = await conn.query(queries.consultarRutasPasajero, id)
+    } catch (e) {
+        throw e.message
+    }
+    return respuesta
+}
+
 export const insertarRutaService = async (ruta) => {
     let idNewProduct = null
     try {
