@@ -2,7 +2,8 @@ import { Router } from 'express'
 import {
   insertarI, loginController, consultarUsuariosController, insertarAdminController, insertarUsuarioController, insertarConductorController,
   insertarPasajeroController, eliminarUsuarioController, consultarUsuarioController, actualizarAdminController, actualizarConductorController, actualizarPasajeroController,
-  actualizarUsuarioController, consultarRutasController, consultarRutaController, consultarConductoresController, consultarRutasConductorController, insertarRutaController,
+  actualizarUsuarioController, consultarRutasController, consultarRutaController, consultarConductoresController, consultarRutasConductorController, 
+  consultarRutasPasajeroController, insertarRutaController,
   eliminarRutaController, actualizarRutaController, consultarPasajerosRutaController, consultarPasajerosController, insertarPasajeroRutaController,
   eliminarPasajeroRutaController, consultarIncidenciasController, insertarIncidenciaController, eliminarIncidenciaController, consultarInformeIncidenciaController,
   consultarInformeAsistenciaController, consultarRutasIncidenciasController, insertarAsistenciaController
@@ -28,6 +29,7 @@ router.get("/consultarRutas", consultarRutasController) //consultar todas las ru
 router.get("/consultarRuta", consultarRutaController) //consultar una ruta
 router.get("/consultarConductores", consultarConductoresController) //consultar conductores para lista
 router.get("/consultarRutasConductor", consultarRutasConductorController) //consultar las rutas de un conductor
+router.get("/consultarRutasPasajero", consultarRutasPasajeroController) //consultar las rutas de un pasajero
 router.post("/insertarRuta", insertarRutaController)//insertar ruta
 router.get("/eliminarRuta", eliminarRutaController)//eliminar ruta
 router.post("/actualizarRuta", actualizarRutaController) //actualizar ruta

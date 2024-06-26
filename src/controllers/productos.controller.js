@@ -1,8 +1,9 @@
 import {
     loginService, consultarUsuariosService, insertarAdminService, insertarUsuarioService, insertarConductorService, insertarPasajeroService,
     eliminarUsuarioService, consultarUsuarioService, actualizarAdminService, actualizarCondcutorService, actualizarPasajeroService, actualizarUsuarioService,
-    consultarRutasService, consultarRutaService, consultarConductoresService, consultarRutasCondcutorService, insertarRutaService, eliminarRutaService,
-    actualizarRutaService, consultarPasajerosRutaService, consultarPasajerosService, insertarPasajeroRutaService, eliminarPasajeroRutaService, consultarIncidenciasService, insertarIncidenciaService, eliminarIncidenciaService,
+    consultarRutasService, consultarRutaService, consultarConductoresService, consultarRutasCondcutorService, consultarRutasPasajeroService, insertarRutaService, 
+    eliminarRutaService, actualizarRutaService, consultarPasajerosRutaService, consultarPasajerosService, insertarPasajeroRutaService, eliminarPasajeroRutaService, 
+    consultarIncidenciasService, insertarIncidenciaService, eliminarIncidenciaService,
     consultarInformeIncidenciaService, consultarInformeAsistenciaService, consultarRutasIncidenciasService, insertarAsistenciaService
 } from '../servicios/productos.servicio'
 
@@ -432,6 +433,26 @@ export const consultarRutasConductorController = async (req, res) => {
         const idd = await consultarRutasCondcutorService(id)
         respuesta = idd
 
+        status = 200
+    } catch (e) {
+        respuesta = {
+            success: false,
+            data: null,
+            message: "Rutas no encontradas"
+        }
+        status = 400
+    }
+    res.status(status)
+    res.json(respuesta)
+}
+
+export const consultarRutasPasajeroController = async (req, res) => {
+    let respuesta = null
+    let status = null
+    try {
+        const { id } = req.query
+        const idd = await consultarRutasPasajeroService(id)
+        respuesta = idd
         status = 200
     } catch (e) {
         respuesta = {
